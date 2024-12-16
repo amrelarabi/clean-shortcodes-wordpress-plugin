@@ -1,0 +1,47 @@
+# Node.js dependencies
+/node_modules/
+/package-lock.json
+/yarn.lock
+
+# Build output
+/dist/
+/build/
+/*.map
+
+# Sass/CSS compiled files
+*.css.map
+*.scssc
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# WordPress plugin specific
+/wp-content/uploads/
+/wp-content/cache/
+/wp-content/debug.log
+
+# OS-specific files
+*.DS_Store
+*.Thumbs.db
+*.Spotlight-V100
+*.Trashes
+desktop.ini
+
+# IDE files
+/.idea/
+/.vscode/
+/*.sublime-project
+/*.sublime-workspace
+
+# Plugin specific
+.env
+.env.local
+vendor/
+.cache-loader/
+.venv/
+*.local

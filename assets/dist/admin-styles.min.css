@@ -1,0 +1,144 @@
+:root {
+  --primary-color: #007cba;
+  --primary-hover-color: #005f8b;
+  --secondary-color: #f1f1f1;
+  --bg-color: #f9f9f9;
+  --text-color: #333;
+  --border-color: #ddd;
+  --hover-bg-color: #e6f4fa;
+}
+
+#clean-unused-shortcodes {
+  background-color: var(--bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+#clean-unused-shortcodes h1 {
+  color: var(--primary-color);
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#clean-unused-shortcodes h2 {
+  color: var(--primary-color);
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#clean-unused-shortcodes p {
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+#clean-unused-shortcodes th,
+#clean-unused-shortcodes td {
+  text-align: center;
+  vertical-align: middle;
+}
+#clean-unused-shortcodes button {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+#clean-unused-shortcodes button:hover {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+#clean-unused-shortcodes button:active {
+  transform: translateY(0);
+}
+#clean-unused-shortcodes button.button-primary {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-hover-color);
+}
+#clean-unused-shortcodes button.button-primary:hover {
+  background: var(--primary-hover-color);
+  color: #fff;
+}
+#clean-unused-shortcodes button.button-secondary {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+#clean-unused-shortcodes button.button-secondary:hover {
+  background: var(--primary-hover-color);
+  color: #fff;
+}
+#clean-unused-shortcodes ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#clean-unused-shortcodes ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+#clean-unused-shortcodes ul li:hover {
+  background: var(--hover-bg-color);
+}
+#clean-unused-shortcodes ul li span {
+  font-weight: bold;
+  color: var(--text-color);
+}
+#clean-unused-shortcodes ul li a {
+  margin-left: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  color: var(--primary-color);
+  transition: color 0.3s;
+}
+#clean-unused-shortcodes ul li a:hover {
+  color: var(--primary-hover-color);
+  text-decoration: underline;
+}
+#clean-unused-shortcodes ul li a.edit-post, #clean-unused-shortcodes ul li a.view-post {
+  margin-left: 5px;
+  font-weight: bold;
+}
+#clean-unused-shortcodes .tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+#clean-unused-shortcodes .tabs button {
+  margin: 0 5px;
+}
+#clean-unused-shortcodes .tabs .button-primary {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  #clean-unused-shortcodes {
+    padding: 15px;
+  }
+  #clean-unused-shortcodes h2 {
+    font-size: 20px;
+  }
+  #clean-unused-shortcodes button {
+    padding: 8px 16px;
+  }
+  #clean-unused-shortcodes ul li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+  #clean-unused-shortcodes ul li a {
+    margin-top: 5px;
+  }
+}
