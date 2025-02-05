@@ -15,6 +15,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 20px;
 }
 #clean-unused-shortcodes h1 {
   color: var(--primary-color);
@@ -64,6 +65,14 @@
 #clean-unused-shortcodes button.button-primary:hover {
   background: var(--primary-hover-color);
   color: #fff;
+}
+#clean-unused-shortcodes button.button-primary.clean-btn, #clean-unused-shortcodes button.button-primary.clean-all {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  background-color: #eb4444;
+  color: #fff;
+  border: 1px solid #eb4444;
 }
 #clean-unused-shortcodes button.button-secondary {
   background: var(--secondary-color);

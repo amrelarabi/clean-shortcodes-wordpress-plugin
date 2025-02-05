@@ -156,6 +156,9 @@ class Clean_Unused_Shortcodes {
 		$this->loader->add_action( 'wp_ajax_cus_fetch_shortcodes', $plugin_admin, 'cus_fetch_shortcodes' );
 		$this->loader->add_action( 'wp_ajax_nopriv_cus_fetch_shortcodes', $plugin_admin, 'cus_fetch_shortcodes' );
 
+		$this->loader->add_action( 'wp_ajax_cus_clean_all_shortcode', $plugin_admin, 'cus_clean_all_shortcode' );
+		$this->loader->add_action( 'wp_ajax_nopriv_cus_clean_all_shortcode', $plugin_admin, 'cus_clean_all_shortcode' );
+
 	}
 
 

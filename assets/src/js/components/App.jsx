@@ -40,6 +40,41 @@ const App = () => {
         }
     };
 
+    const cleanAllShortcodes = async () => {
+        if (!confirm(__("Are you sure you want to clean all unused shortcodes?", "clean-unused-shortcodes"))) {
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await fetch(cus_ajax_object.admin_ajax, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    action: "cus_clean_all_shortcode",
+                    _wpnonce: cus_ajax_object.cleanShortcodesNonce,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert(__("All unused shortcodes cleaned successfully!", "clean-unused-shortcodes"));
+                fetchShortcodes(); // Refresh the list after cleaning
+
+            } else {
+                alert(__("Error cleaning shortcodes.", "clean-unused-shortcodes"));
+            }
+        } catch (error) {
+            alert(__("An error occurred while cleaning shortcodes.", "clean-unused-shortcodes"));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     const cleanShortcode = async (shortcode) => {
         if (!confirm(`${__("Are you sure you want to remove this shortcode?", "clean-unused-shortcodes")} ${shortcode}`)) {
             return;
@@ -84,6 +119,16 @@ const App = () => {
                 <>
                     <h3>{__("Unused Shortcodes", "clean-unused-shortcodes")}</h3>
                     {unusedShortcodes.length > 0 ? (
+                        <>
+                        <button
+                            className="button button-primary clean-all"
+                            onClick={cleanAllShortcodes}
+                            disabled={loading}
+                        >
+                            {loading
+                                ? __("Cleaning All...", "clean-unused-shortcodes")
+                                : __("Clean All Unused Shortcodes", "clean-unused-shortcodes")}
+                        </button>
                         <table className="wp-list-table widefat fixed striped">
                             <thead>
                                 <tr>
@@ -114,7 +159,7 @@ const App = () => {
                                         </td>
                                         <td>
                                             <button
-                                                className="button button-primary"
+                                                className="button button-primary clean-btn"
                                                 onClick={() => cleanShortcode(shortcode.name)}
                                             >
                                                 {__("Clean", "clean-unused-shortcodes")}
@@ -125,6 +170,7 @@ const App = () => {
                             </tbody>
 
                         </table>
+                        </>
                     ) : (
                         <p>{__("No unused shortcodes found.", "clean-unused-shortcodes")}</p>
                     )}

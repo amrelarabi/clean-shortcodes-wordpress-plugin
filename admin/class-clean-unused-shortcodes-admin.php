@@ -188,6 +188,67 @@ class Clean_Unused_Shortcodes_Admin {
 	}
 
 	/**
+	 * Clean all shortcodes AJAX.
+	 *
+	 * @return void
+	 */
+	public function cus_clean_all_shortcode() {
+		check_ajax_referer( 'clean_shortcodes_nonce', '_wpnonce' );
+		$posts = get_posts(
+			array(
+				'post_type'   => 'any',
+				'numberposts' => -1,
+				'post_status' => 'any',
+			)
+		);
+		foreach ( $posts as $post ) {
+			$updated_content = $this->cus_clean_all_shortcode_content( $post->post_content );
+			if ( $updated_content !== $post->post_content ) {
+				wp_update_post(
+					array(
+						'ID'           => $post->ID,
+						'post_content' => $updated_content,
+					)
+				);
+			}
+		}
+		wp_send_json_success( __( 'All shortcodes removed successfully!', 'clean-unused-shortcodes' ) );
+	}
+
+
+	/**
+	 * Clean all unused shortcodes from the given content.
+	 *
+	 * @param string $content The content to clean.
+	 * @return string The cleaned content.
+	 */
+	private function cus_clean_all_shortcode_content( $content ) {
+		global $shortcode_tags;
+
+		// Get all registered shortcodes.
+		$active_shortcodes = is_array( $shortcode_tags ) ? array_keys( $shortcode_tags ) : array();
+
+		// Escape and create regex for active shortcodes.
+		$escaped_active_shortcodes = array_map( 'preg_quote', $active_shortcodes, array_fill( 0, count( $active_shortcodes ), '/' ) );
+		$active_regex              = implode( '|', $escaped_active_shortcodes );
+
+		// Regex to match unused shortcodes (self-closing and paired).
+		$unused_shortcode_pattern = '/\[(?!' . $active_regex . ')\w+(?:[^\[\]]*|(?R))*?\[\/\w+\]|\[(?!' . $active_regex . ')\w+[^\]]*\/\]/';
+
+		// Use a loop to remove all instances of unused shortcodes.
+		while ( preg_match( $unused_shortcode_pattern, $content ) ) {
+			$content = preg_replace( $unused_shortcode_pattern, '', $content );
+		}
+
+		// Clean up any leftover incomplete shortcode tags (opening or closing only).
+		$leftover_shortcode_pattern = '/\[(?!' . $active_regex . ')\w+[^\]]*\]|\[\/(?!' . $active_regex . ')\w+\]/';
+		$content                    = preg_replace( $leftover_shortcode_pattern, '', $content );
+
+		return trim( $content );
+	}
+
+
+	/**
 	 * Fetch shortcodes AJAX.
 	 *
 	 * @return void
@@ -252,7 +313,7 @@ class Clean_Unused_Shortcodes_Admin {
 			wp_send_json_error( __( 'No shortcode provided.', 'clean-unused-shortcodes' ) );
 		}
 
-		$shortcode = sanitize_text_field( $_POST['shortcode'] );
+		$shortcode = sanitize_text_field( wp_unslash( $_POST['shortcode'] ) );
 
 		// Fetch all posts that might contain the shortcode.
 		$posts = get_posts(

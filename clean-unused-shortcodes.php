@@ -61,11 +61,6 @@ register_deactivation_hook( __FILE__, 'deactivate_clean_unused_shortcodes' );
 require plugin_dir_path( __FILE__ ) . 'includes/class-clean-unused-shortcodes.php';
 
 /**
- * Tests
- */
-require plugin_dir_path( __FILE__ ) . 'admin/tests.php';
-
-/**
  * Begins execution of the plugin.
  *
  * Since everything within the plugin is registered via hooks,
